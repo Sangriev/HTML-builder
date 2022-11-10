@@ -9,14 +9,21 @@ fs.readdir(
 
         data.forEach((file) => {
             if (!file.isDirectory())
-                console.log(
-                    file.name +
-                        " \t\t " +
-                        path.extname(file.name) +
-                        " \t\t " +
-                        fs.statSync(
-                            "03-files-in-folder/secret-folder/" + file.name
-                        ).size
+                fs.stat(
+                    path.join("03-files-in-folder/secret-folder", file.name),
+                    (error, stats) => {
+                        if (error) {
+                            console.log(error);
+                        }
+                        console.log(
+                            file.name,
+                            " - ",
+                            path.extname(file.name),
+                            " - ",
+                            stats.size,
+                            "bytes"
+                        );
+                    }
                 );
         });
     }
