@@ -3,6 +3,8 @@ const fs = require("fs");
 const path = require("path");
 const writeStream = fs.createWriteStream(path.join(__dirname, "./text.txt"));
 
+stdout.write('Enter the text:\n')
+
 stdin.on("data", (data) => {
     const dataStringified = data.toString();
     writeStream.write(data);
